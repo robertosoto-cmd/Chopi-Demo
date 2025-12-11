@@ -1,0 +1,64 @@
+<?php
+// index.php - Pantalla de video introductorio
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Introducción - Laboratorio PC</title>
+
+    <!-- Tipografías del diseño -->
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@600&family=Anybody:wght@400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/intro.css">
+</head>
+<body>
+
+<div class="intro-contenedor">
+    <video
+        id="introVideo"
+        class="intro-video"
+        src="assets/videos/intro.mp4"
+        autoplay
+        muted
+        playsinline
+    ></video>
+
+    <button id="skipBtn" class="boton-saltar">
+        Omitir
+    </button>
+</div>
+
+<script>
+    const video = document.getElementById('introVideo');
+    const skipBtn = document.getElementById('skipBtn');
+
+    function irAlLogin() {
+        window.location.href = 'menu_profesor.php';
+    }
+
+    // Cuando termine el video, ir al menú
+    video.addEventListener('ended', irAlLogin);
+
+    // Si el profesor no quiere ver todo, puede saltar
+    skipBtn.addEventListener('click', irAlLogin);
+
+    // ========= ACTIVAR SONIDO DESPUÉS DEL PRIMER CLICK =========
+    function activarSonidoUnaVez() {
+        // Intentamos quitar el mute y reproducir
+        video.muted = false;
+        video.play().catch(() => {
+            // Si el navegador sigue bloqueando, no hacemos nada más
+        });
+
+        // Ya no necesitamos seguir escuchando más clics
+        document.removeEventListener('click', activarSonidoUnaVez);
+    }
+
+    // Primer clic en la página: activamos sonido del video
+    document.addEventListener('click', activarSonidoUnaVez);
+</script>
+
+</body>
+</html>
