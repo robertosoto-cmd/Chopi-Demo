@@ -1,0 +1,89 @@
+/* ======== ESTILO GENERAL ======== */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: "Anybody", sans-serif;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Contenedor general a pantalla completa */
+.instrucciones-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Ya no necesitamos un bloque de contenido centrado */
+.instrucciones-contenido {
+    width: 100%;
+    height: 100%;
+}
+
+/* VIDEO PRINCIPAL / CONTADOR A PANTALLA COMPLETA */
+
+.video-instrucciones,
+.video-contador {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
+}
+
+/* BOTÓN CONTINUAR (SUPERPUESTO ABAJO) */
+
+.botones-instrucciones {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+.btn-instruccion {
+    border: none;
+    border-radius: 999px;
+    padding: 11px 26px;
+    font-family: "Anybody", sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease,
+                box-shadow 0.15s ease,
+                background-color 0.15s ease;
+}
+
+.btn-continuar {
+    background: #22c55e;
+    color: #022c22;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.55);
+}
+
+.btn-continuar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.8);
+}
+
+/* UTILIDAD */
+
+.oculto {
+    display: none;
+}
+
+/* RESPONSIVE (solo ajustamos la posición un poco) */
+
+@media (max-width: 700px) {
+    .botones-instrucciones {
+        bottom: 24px;
+    }
+
+    .btn-instruccion {
+        padding: 10px 22px;
+        font-size: 0.95rem;
+    }
+}

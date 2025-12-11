@@ -1,0 +1,124 @@
+/* assets/css/intro_juego.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: "Anybody", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #050016;
+    color: #ffffff;
+}
+
+.intro-juego-contenedor {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* video ocupa la parte superior/central */
+.intro-juego-video-wrapper {
+    flex: 1;
+    position: relative;
+    background: #000;
+}
+
+.intro-juego-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;      /* para ver completo el video */
+    background: #000;
+}
+
+/* panel inferior con texto + botones, bien claro */
+.intro-juego-panel {
+    padding: 1.4rem 2rem;
+    background: linear-gradient(180deg, rgba(5,0,22,0.95), rgba(5,0,22,1));
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.intro-juego-titulo {
+    font-family: "Grandstander", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.8rem;
+    color: #ff7a2f;
+}
+
+.intro-juego-texto {
+    font-size: 1rem;
+    line-height: 1.4rem;
+    color: #f5ecff;
+}
+
+/* zona de botones */
+.intro-juego-controles {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* botón “Omitir” / “Continuar”: grande y claro */
+.intro-juego-boton {
+    padding: 0.9rem 2.4rem;
+    border-radius: 999px;
+    border: none;
+    font-size: 1.1rem;
+    font-family: "Grandstander", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+/* estilos de color para cada tipo */
+.boton-omitir {
+    background: #ff8fb1;
+    color: #ffffff;
+}
+
+.boton-omitir:hover {
+    background: #ff7aa3;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0,0,0,0.5);
+}
+
+.boton-continuar {
+    background: #4fd1c5;
+    color: #050016;
+}
+
+.boton-continuar:hover {
+    background: #3bb5aa;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+    .intro-juego-panel {
+        padding: 1rem 1.2rem;
+    }
+
+    .intro-juego-titulo {
+        font-size: 1.5rem;
+    }
+
+    .intro-juego-texto {
+        font-size: 0.95rem;
+    }
+
+    .intro-juego-boton {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+}

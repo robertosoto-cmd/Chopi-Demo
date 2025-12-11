@@ -1,0 +1,313 @@
+/* ======== ESTILO GENERAL ======== */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #1a103b;
+    font-family: "Anybody", sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.contenedor-juego {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ======== BODEGA / MÁQUINA SUPERIOR ======== */
+
+/* Ocupa toda la pantalla a lo ancho */
+.bodega-contenedor {
+    position: relative;
+    width: 100vw;
+    margin: 0;
+}
+
+.fondo-bodega {
+    width: 100vw;
+    height: auto;
+    display: block;
+    user-select: none;
+}
+
+
+/* ======== DISPLAY DE LA MULTIPLICACIÓN (DENTRO DEL FONDO) ======== */
+
+.display-multiplicacion {
+    position: absolute;
+    top: 8.5%;              /* ajusta si hace falta */
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Grandstander";
+    font-size: 3rem;
+    color: #222;
+}
+
+#texto-multiplicacion {
+    user-select: none;
+}
+
+
+/* ======== BARRA DE TIEMPO DENTRO DEL FONDO ======== */
+
+.barra-tiempo-contenedor {
+    position: absolute;
+    top: 19%;              /* debajo del display, ajusta según tu fondo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    z-index: 5;
+}
+
+.barra-tiempo-fondo {
+    width: 100%;
+    height: 14px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.barra-tiempo {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: #22c55e; /* verde inicial */
+    transition: width 0.1s linear, background-color 0.1s linear;
+}
+
+
+/* ======== SLOTS EN LA MÁQUINA ======== */
+
+.slots-superiores {
+    position: absolute;
+    top: 29%;
+    left: 22%;
+    width: 56%;
+    height: 25%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 62px;
+}
+
+.slot {
+    position: relative;        /* para que el número se centre dentro */
+    width: 12.5%;
+    height: 80%;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    border: 2px dashed rgba(255,255,255,0.25);
+    overflow: hidden;
+}
+
+
+/* ======== BARRILES INFERIORES (DENTRO DEL FONDO) ======== */
+
+.contenedor-barriles {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5%;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.barril {
+    position: relative;
+    width: 140px;
+    height: 170px;
+    cursor: grab;
+}
+
+.barril-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Interior del barril SOBRE el barril normal */
+.barril-interior {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .25s ease-in-out;
+    z-index: 2;
+}
+
+.barril:hover .barril-interior {
+    opacity: 1;
+}
+
+.barril-interior-img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+/* Cristal MUCHO más pequeño y centrado */
+.barril-cristal {
+    position: absolute;
+    width: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 12px;
+}
+
+/* Número dentro del barril (los de abajo) */
+.barril-numero {
+    position: absolute;
+    top: 36%;
+    width: 100%;
+    font-size: 2.4rem;
+    color: white;
+    font-family: "Grandstander";
+    text-shadow: 0 0 5px black;
+    user-select: none;
+    text-align: center;
+}
+
+
+/* ======== ESTADOS VISUALES EXTRA PARA SLOTS ======== */
+
+.slot-activo {
+    box-shadow: 0 0 0 3px #4fd1c5;
+}
+
+/* SLOT cuando se coloca el barril CORRECTO */
+.slot-lleno {
+    border-style: solid;
+    border-color: #22c55e;                      /* verde */
+    background: rgba(34, 197, 94, 0.18);        /* fondo verdoso suave */
+    box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);/* brillo verde */
+    transition: all 0.25s ease-out;
+}
+
+/* Barril dibujado dentro del slot cuando es correcto */
+.slot-barril-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Número dentro del barril del slot */
+.slot-barril-numero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Grandstander";
+    font-size: 1.6rem;
+    color: white;
+    text-shadow: 0 0 5px black;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Cuando se deja caer algo incorrecto */
+.slot-error {
+    border-color: #ff4b4b;
+}
+
+
+/* ======== MODAL DE FIN DE JUEGO ======== */
+
+.modal-fin {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-in-out;
+    z-index: 999;
+}
+
+.modal-fin.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-fin-contenido {
+    background: #25123f;
+    border-radius: 24px;
+    padding: 28px 32px 24px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+    text-align: center;
+    color: #fff;
+}
+
+.modal-fin-contenido h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-family: "Grandstander";
+    font-size: 2rem;
+    color: #ffd166;
+}
+
+.modal-fin-contenido p {
+    margin: 0 0 24px;
+    font-family: "Anybody";
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+.modal-fin-botones {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-modal {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-family: "Anybody";
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+}
+
+.btn-modal:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+.btn-reintentar {
+    background: #4ade80;
+    box-shadow: 0 4px 12px rgba(34,197,94,0.4);
+    color: #052e16;
+}
+
+.btn-volver {
+    background: #fb7185;
+    box-shadow: 0 4px 12px rgba(248,113,113,0.4);
+    color: #fff;
+}

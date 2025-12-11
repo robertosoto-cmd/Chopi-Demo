@@ -1,0 +1,152 @@
+/* assets/css/menu.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: "Anybody", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #050016; /* respaldo por si el video tarda */
+    color: #ffffff;
+}
+
+.menu-contenedor {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* VIDEO DE FONDO */
+.menu-fondo-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Capa para mejorar contraste */
+.menu-capa-oscura {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.8));
+    z-index: 1;
+}
+
+/* ENCABEZADO */
+.menu-encabezado {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-top: 1.8rem;
+    padding-inline: 1rem;
+}
+
+.menu-titulo {
+    font-family: "Grandstander", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 2.1rem;
+    color: #ff7a2f; /* naranja del diseño */
+    margin-bottom: 0.4rem;
+}
+
+.menu-subtitulo {
+    font-size: 1rem;
+    color: #f9f2ff;
+}
+
+/* CONTENEDOR DE PLANETAS */
+.menu-planetas {
+    position: relative;
+    z-index: 2;
+    margin-top: 4rem;            /* más separado del título */
+    display: flex;
+    justify-content: center;
+    gap: 6rem;                    /* MUCHA separación entre planetas */
+    flex-wrap: nowrap;
+    padding-inline: 3rem;
+}
+
+/* BOTÓN PLANETA (CLARO, GRANDE Y ENTENDIBLE) */
+.planeta-boton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;                  /* más espacio icono–texto */
+
+    padding: 1rem 1rem;           /* área clicable aún mayor */
+    min-width: 220px;             /* ancho mínimo grande */
+}
+
+/* GIF DEL PLANETA */
+.planeta-img {
+    width: 220px;                 /* antes 180px */
+    height: auto;
+    display: block;
+
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.65));
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
+}
+
+/* TEXTO DEBAJO DEL PLANETA */
+.planeta-texto {
+    font-family: "Grandstander", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.4rem;              /* antes 1.1rem */
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Hover igual funciona, pero ahora se nota más */
+.planeta-boton:hover .planeta-img,
+.planeta-boton:focus .planeta-img {
+    transform: translateY(-8px) scale(1.08);
+    filter: drop-shadow(0 14px 24px rgba(0,0,0,0.85));
+}
+
+.planeta-boton:focus {
+    outline: 2px solid #ff8fb1;
+    outline-offset: 4px;
+}
+
+/* PIE */
+.menu-pie {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 2.5rem;
+    padding-bottom: 1.2rem;
+    font-size: 0.8rem;
+    color: #d8cfff;
+}
+
+@media (max-width: 768px) {
+    .menu-titulo {
+        font-size: 1.6rem;
+    }
+
+    .menu-planetas {
+        flex-wrap: wrap;           /* en móvil sí dejamos que se bajen */
+        gap: 2.5rem;
+        margin-top: 2.2rem;
+    }
+
+    .planeta-img {
+        width: 140px;
+    }
+
+    .planeta-texto {
+        font-size: 1.15rem;
+    }
+}
+

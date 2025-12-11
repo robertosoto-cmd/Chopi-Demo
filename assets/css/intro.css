@@ -1,0 +1,69 @@
+/* assets/css/intro.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #000;
+}
+
+.intro-contenedor {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Video a pantalla completa */
+.intro-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.boton-saltar {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+
+    /* TAMAÑO MÁS GRANDE */
+    padding: 1rem 3rem;                 /* Más alto y más ancho */
+    min-width: 180px;                   /* No se hace muy chiquito */
+    font-size: 1.2rem;                  /* Texto más grande */
+
+    /* ESTILO VISUAL */
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #ff8fb1;                /* Ajusta si tienes otro rosa exacto */
+    color: #ffffff;
+    font-family: "Grandstander", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
+    /* TRANSICIONES SUAVES */
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+/* Hover para feedback claro (H-M) */
+.boton-saltar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+    background: #ff7aa3;
+}
+
+.boton-saltar:focus {
+    outline: none;
+}
+
+
+

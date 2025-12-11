@@ -1,0 +1,443 @@
+/* ======== ESTILO GENERAL ======== */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: "Anybody", sans-serif;
+    overflow: hidden;         /* pantalla completa del juego */
+}
+
+.cohete-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ======== VIDEO DE FONDO ======== */
+
+.video-fondo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ======== CAPA DEL JUEGO ENCIMA DEL VIDEO ======== */
+
+.capa-juego {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+/* ======== PANEL SUPERIOR: ORACIÓN ======== */
+
+.panel-oracion {
+    padding: 12px 0 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+}
+
+/* Burbuja rosada estilo imagen — AUMENTADA */
+.burbuja-oracion {
+    background: #fd9e9d;
+    border-radius: 999px;
+    padding: 14px 42px; /* ← MÁS GRANDE */
+    max-width: 95%;     /* ← permite que crezca sin cortarse */
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
+    display: inline-block;
+
+    /* estado base antes de animación */
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+}
+
+/* clase para disparar animación de entrada */
+.burbuja-oracion.anim-entrada {
+    animation: burbujaEntrada 0.45s ease-out forwards;
+}
+
+@keyframes burbujaEntrada {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.96);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(0) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Texto principal — AUMENTADO */
+.texto-oracion {
+    margin: 0;
+    font-family: "Grandstander", cursive;
+    font-size: 1.85rem;  /* ← más grande */
+    font-weight: 700;
+    color: #a3372f;
+    text-align: center;
+}
+
+/* Hueco blanco — AUMENTADO */
+.texto-conector-vacio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;    /* ← más grande */
+    padding: 6px 16px;   /* ← más cómodo */
+    margin: 0 8px;
+    background: #ffffff;
+    border-radius: 999px;
+    color: #a3372f;
+    font-size: 1.7rem;   /* ← más grande */
+    font-weight: 700;
+}
+
+/* Instrucción debajo — AUMENTADA */
+.texto-instruccion {
+    margin: 0;
+    font-size: 1.15rem; /* antes 0.9rem */
+    letter-spacing: 0.03em;
+    opacity: 0.92;
+    text-shadow: 0 0 4px rgba(0,0,0,0.7);
+    text-align: center;
+    padding: 0 16px;
+}
+
+/* ======== ZONA PRINCIPAL DEL JUEGO ======== */
+
+.zona-juego {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 22% 78%;
+    align-items: stretch;
+    padding: 10px 16px 8px;
+}
+
+/* ======== COLUMNA DEL COHETE ======== */
+
+.columna-cohete {
+    position: relative;
+}
+
+/* Contenedor del cohete */
+.cohete-contenedor {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 200px;
+}
+
+.cohete-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ======== COLUMNA DEL ESPACIO (METEORITOS) ======== */
+
+.columna-espacio {
+    position: relative;
+    overflow: visible;
+}
+
+.carriles-meteoritos {
+    position: absolute;
+    inset: 8% 4% 8% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 2 carriles */
+.carril {
+    position: relative;
+    height: 45%;
+}
+
+/* ======== SPRITES ======== */
+
+.asteroide,
+.laser,
+.explosion {
+    position: fixed;
+    pointer-events: none;
+    user-select: none;
+}
+
+.asteroide {
+    width: 460px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asteroide-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.asteroide-text {
+    position: relative;
+    z-index: 2;
+    font-family: "Grandstander", cursive;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+    padding: 0 4px;
+}
+
+.laser {
+    width: 100px;
+    height: 75px;
+}
+
+.explosion {
+    width: 650px;
+    height: 170px;
+    transform-origin: center;
+    animation: explosion-pop 0.4s ease-out forwards;
+}
+
+@keyframes explosion-pop {
+    0%   { transform: scale(0.6); opacity: 0.2; }
+    50%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0; }
+}
+
+/* ======== HUD INFERIOR (PUNTOS + VIDAS) ======== */
+
+.hud-inferior {
+    position: absolute;
+    left: 20px;
+    bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    z-index: 10;
+}
+
+.puntos-hud {
+    background: rgba(15, 23, 42, 0.85);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: "Grandstander", cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.puntos-hud span {
+    color: #facc15;
+    font-weight: 700;
+}
+
+.vidas {
+    display: flex;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.7);
+    padding: 6px 12px;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.corazon {
+    font-size: 2.2rem;
+    color: #ff4b7d;
+    text-shadow: 0 0 6px rgba(0,0,0,0.75);
+    opacity: 0.25;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.corazon-activo {
+    opacity: 1;
+}
+
+.corazon-hit {
+    animation: corazonHit 0.25s ease-out;
+}
+
+@keyframes corazonHit {
+    0%   { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* ======== PANEL INFERIOR ======== */
+
+.panel-controles {
+    padding: 6px 16px 10px;
+    background: linear-gradient(
+        to top,
+        rgba(5, 10, 30, 0.9),
+        rgba(5, 10, 30, 0.4)
+    );
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.7);
+}
+
+.ayuda-controles {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+}
+
+.item-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(15, 23, 42, 0.75);
+    border-radius: 999px;
+    padding: 4px 10px;
+}
+
+.tecla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 8px;
+    border-radius: 6px;
+    background: #fbbf24;
+    color: #1e1b4b;
+    font-family: "Grandstander";
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* ======== MODAL ======== */
+
+.modal-juego {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+.modal-contenido {
+    background: #0f172a;
+    padding: 20px 28px;
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    border: 2px solid #fd9e9d;
+}
+
+.modal-contenido h2 {
+    margin: 0 0 10px;
+    font-family: "Grandstander", cursive;
+    font-size: 1.6rem;
+    color: #fd9e9d;
+}
+
+.modal-contenido p {
+    margin: 0 0 18px;
+    font-size: 0.95rem;
+    color: #e5e7eb;
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-botones button {
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-family: "Anybody", sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+#btnReintentar {
+    background: #22c55e;
+    color: #022c22;
+}
+
+#btnMenu {
+    background: #0ea5e9;
+    color: #02131f;
+}
+
+.oculto {
+    display: none;
+}
+
+/* ======== RESPONSIVE ======== */
+
+@media (max-width: 900px) {
+    .zona-juego {
+        grid-template-columns: 26% 74%;
+    }
+
+    .cohete-contenedor {
+        width: 280px;
+        height: 160px;
+    }
+
+    .texto-oracion {
+        font-size: 1.55rem;
+    }
+
+    .texto-conector-vacio {
+        font-size: 1.4rem;
+        min-width: 90px;
+    }
+
+    .asteroide {
+        width: 340px;
+        height: 210px;
+    }
+}
+
+@media (max-width: 650px) {
+    .zona-juego {
+        grid-template-columns: 30% 70%;
+    }
+
+    .texto-oracion {
+        font-size: 1.3rem;
+    }
+
+    .texto-conector-vacio {
+        font-size: 1.2rem;
+        min-width: 80px;
+    }
+
+    .cohete-contenedor {
+        width: 220px;
+        height: 130px;
+    }
+}

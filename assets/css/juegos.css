@@ -1,0 +1,201 @@
+/* assets/css/juegos.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: "Anybody", sans-serif;
+    color: #ffffff;
+    background: #050016;
+    overflow-x: hidden;
+}
+
+/* ================= VIDEO ================= */
+
+.juego-video-fondo-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.juego-video-fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.juego-video-capa {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,20,0.6);
+}
+
+/* ================= LAYOUT ================= */
+
+.juego-layout {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem;
+    text-align: center;
+}
+
+/* Titulos */
+.juego-titulo {
+    font-family: "Grandstander";
+    font-size: 2.6rem;
+    color: #ff7a2f;
+}
+
+.juego-subtitulo {
+    margin-bottom: 1.3rem;
+    font-size: 1.1rem;
+}
+
+/* ================= BARRA DE TIEMPO ================= */
+
+#barra-tiempo-container {
+    width: 80%;
+    max-width: 700px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    margin: 0.7rem auto 1.4rem auto;
+    overflow: hidden;
+}
+
+#barra-tiempo {
+    height: 100%;
+    width: 100%;
+    background: #37ff44; /* verde */
+    transition: width 0.2s linear, background 0.4s ease;
+}
+
+/* ================= TABLERO ================= */
+
+#memoria-tablero {
+    display: grid;
+    gap: 1.2rem;
+    justify-content: center;
+    padding: 1.2rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1100px;
+    background: rgba(7, 3, 35, 0.9);
+    border-radius: 1.5rem;
+}
+
+/* Cartas */
+.mem-card {
+    width: 150px;
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.mem-card-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease;
+}
+
+.mem-card-front,
+.mem-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 1rem;
+}
+
+.mem-card-back {
+    background: linear-gradient(145deg, #ff8fb1, #ff7a2f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Grandstander";
+    font-size: 1.7rem;
+    color: white;
+}
+
+.mem-card-front {
+    transform: rotateY(180deg);
+    background: #12092f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mem-card-front img {
+    width: 78%;
+}
+
+.mem-card.flipped .mem-card-inner {
+    transform: rotateY(180deg);
+}
+
+.mem-card.match .mem-card-inner {
+    box-shadow: 0 0 0 3px #4fd1c5, 0 0 15px rgba(79,209,197,0.8);
+}
+
+/* ================= BOTONES ================= */
+
+.juego-botones-container {
+    margin-top: 1.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.juego-boton {
+    padding: 0.8rem 1.7rem;
+    border: none;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-family: "Grandstander";
+    box-shadow: 0 5px 12px rgba(0,0,0,0.5);
+}
+
+.juego-boton-primario {
+    background: #4fd1c5;
+    color: #050016;
+}
+
+.juego-boton-secundario {
+    background: #ff8fb1;
+    color: white;
+}
+
+/* ================= MODALES ================= */
+
+.memoria-mensaje-oculto {
+    display: none;
+}
+
+.memoria-mensaje-visible {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+}
+
+.memoria-mensaje-contenido {
+    background: rgba(7, 3, 35, 0.97);
+    padding: 2rem 2.5rem;
+    border-radius: 1.5rem;
+    max-width: 380px;
+    text-align: center;
+}
